@@ -1,0 +1,205 @@
+C:\Users\IgnacioMunoz\OneDrive - Equintec\Coding Dojo\python_stack\django>cd django_orm
+
+C:\Users\IgnacioMunoz\OneDrive - Equintec\Coding Dojo\python_stack\django\django_orm>django admin startproject book_authors_proj
+"django" no se reconoce como un comando interno o externo,
+programa o archivo por lotes ejecutable.
+
+C:\Users\IgnacioMunoz\OneDrive - Equintec\Coding Dojo\python_stack\django\django_orm>cd..
+
+C:\Users\IgnacioMunoz\OneDrive - Equintec\Coding Dojo\python_stack\django>cd..
+
+C:\Users\IgnacioMunoz\OneDrive - Equintec\Coding Dojo\python_stack>cd my_environments
+
+C:\Users\IgnacioMunoz\OneDrive - Equintec\Coding Dojo\python_stack\my_environments>call py3Env\scripts\activate
+
+(py3Env) C:\Users\IgnacioMunoz\OneDrive - Equintec\Coding Dojo\python_stack\my_environments>cd..
+
+(py3Env) C:\Users\IgnacioMunoz\OneDrive - Equintec\Coding Dojo\python_stack>cd django\django_orm
+
+(py3Env) C:\Users\IgnacioMunoz\OneDrive - Equintec\Coding Dojo\python_stack\django\django_orm>django-admin startproject book_authors_proj
+
+(py3Env) C:\Users\IgnacioMunoz\OneDrive - Equintec\Coding Dojo\python_stack\django\django_orm>cd book_authors_proj
+
+(py3Env) C:\Users\IgnacioMunoz\OneDrive - Equintec\Coding Dojo\python_stack\django\django_orm\book_authors_proj>mkdir apps
+
+(py3Env) C:\Users\IgnacioMunoz\OneDrive - Equintec\Coding Dojo\python_stack\django\django_orm\book_authors_proj>cd apps
+
+(py3Env) C:\Users\IgnacioMunoz\OneDrive - Equintec\Coding Dojo\python_stack\django\django_orm\book_authors_proj\apps>django-admin startapp books_authors_app
+
+(py3Env) C:\Users\IgnacioMunoz\OneDrive - Equintec\Coding Dojo\python_stack\django\django_orm\book_authors_proj\apps>cd..
+
+EN OTRO TERMINAL...
+C:\Users\IgnacioMunoz\OneDrive - Equintec\Coding Dojo\python_stack\django\django_orm> psql -U postgres
+Contraseña para usuario postgres: 
+psql (13.2)
+ADVERTENCIA: El código de página de la consola (850) difiere del código
+            de página de Windows (1252).
+            Los caracteres de 8 bits pueden funcionar incorrectamente.
+            Vea la página de referencia de psql «Notes for Windows users»
+            para obtener más detalles.
+Digite «help» para obtener ayuda.
+
+postgres=# CREATE DATABASE books_authors_db;
+CREATE DATABASE
+postgres=# \c books_authors_db
+Ahora está conectado a la base de datos «books_authors_db» con el usuario «postgres».
+books_authors_db=#
+
+VOLVIENDO AL PROJECTO...
+
+(py3Env) C:\Users\IgnacioMunoz\OneDrive - Equintec\Coding Dojo\python_stack\django\django_orm\book_authors_proj>python manage.py makemigrations
+Migrations for 'books_authors_app':
+  apps\books_authors_app\migrations\0001_initial.py
+    - Create model Books
+    - Create model Authors
+
+(py3Env) C:\Users\IgnacioMunoz\OneDrive - Equintec\Coding Dojo\python_stack\django\django_orm\book_authors_proj>python manage.py migrate       
+Operations to perform:
+  Apply all migrations: admin, auth, books_authors_app, contenttypes, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying books_authors_app.0001_initial... OK
+  Applying sessions.0001_initial... OK
+
+(py3Env) C:\Users\IgnacioMunoz\OneDrive - Equintec\Coding Dojo\python_stack\django\django_orm\book_authors_proj>python manage.py shell
+Python 3.6.4 (v3.6.4:d48eceb, Dec 19 2017, 06:54:40) [MSC v.1900 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from book_authors_app import *
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+ModuleNotFoundError: No module named 'book_authors_app'
+>>> from books_authors_app import * 
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+ModuleNotFoundError: No module named 'books_authors_app'
+>>> from books_authors_app.models import * 
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+ModuleNotFoundError: No module named 'books_authors_app'
+>>> from apps.books_authors_app.models import * 
+>>> Books.objects.create(title = 'C Sharp', desc ='Este libro se trata de...')
+<Books: Books object (1)>
+>>> Books.objects.create(title = 'Java', desc ='Este libro se trata de Java')    
+<Books: Books object (2)>
+>>> Books.objects.create(title = 'Python', desc ='Este libro se trata de Python')     
+<Books: Books object (3)>
+>>> Books.objects.create(title = 'PHP', desc ='Este libro se trata de PHP')       
+<Books: Books object (4)>
+>>> Books.objects.create(title = 'Ruby', desc ='Este libro se trata de Ruby') 
+<Books: Books object (5)>
+>>> Authors.objects.create(first_name = 'Jane', last_name ='Austen')                          
+<Authors: Authors object (1)>
+>>> Authors.objects.create(first_name = 'Emily', last_name ='Dickinson')       
+<Authors: Authors object (2)>
+>>> Authors.objects.create(first_name = 'Fyodor', last_name ='Dostoevsky')          
+<Authors: Authors object (3)>
+>>> Authors.objects.create(first_name = 'William', last_name ='Shakespeare')           
+<Authors: Authors object (4)>
+>>> Authors.objects.create(first_name = 'Lau', last_name ='Tzu')             
+<Authors: Authors object (5)>
+>>> ^Z
+
+now exiting InteractiveConsole...
+
+(py3Env) C:\Users\IgnacioMunoz\OneDrive - Equintec\Coding Dojo\python_stack\django\django_orm\book_authors_proj>python manage.py makemigrations
+You are trying to add a non-nullable field 'notas' to authors without a default; we can't do that (the database needs something to populate existing rows).
+Please select a fix:
+ 1) Provide a one-off default now (will be set on all existing rows with a null value for this column)
+ 2) Quit, and let me add a default in models.py
+Select an option: 1
+Please enter the default value now, as valid Python
+The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now
+Type 'exit' to exit this prompt
+>>>
+Please enter some code, or 'exit' (with no quotes) to exit.
+>>> ''
+Migrations for 'books_authors_app':
+  apps\books_authors_app\migrations\0002_authors_notas.py
+    - Add field notas to authors
+
+(py3Env) C:\Users\IgnacioMunoz\OneDrive - Equintec\Coding Dojo\python_stack\django\django_orm\book_authors_proj>
+(py3Env) C:\Users\IgnacioMunoz\OneDrive - Equintec\Coding Dojo\python_stack\django\django_orm\book_authors_proj>python manage.py shell  
+Python 3.6.4 (v3.6.4:d48eceb, Dec 19 2017, 06:54:40) [MSC v.1900 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from apps.books_authors_app-models import *
+  File "<console>", line 1
+    from apps.books_authors_app-models import *
+                               ^
+SyntaxError: invalid syntax
+>>> from apps.books_authors_app.models import * 
+>>> c = Books.objects.get(title = 'C Sharp')
+>>> c.title = 'C #'
+>>> c.save()
+>>> a = Authors.objects.get(id=4)
+>>> a.first_name = 'Bill'
+>>> a.save()
+>>> a = Authors.objects.get(id=1) 
+>>> a.books.add(Books.objects.get(id=1))
+>>> a.books.add(Books.objects.get(id=2)) 
+>>> a2 = Authors.objects.get(id=2)       
+>>> a2.books.add(Books.objects.get(id<4)) 
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+TypeError: '<' not supported between instances of 'builtin_function_or_method' and 'int'
+>>> first3 = Books.objects.filter(id__lt=4)        
+>>> first3.values()
+<QuerySet [{'id': 2, 'title': 'Java', 'desc': 'Este libro se trata de Java', 'created_at': datetime.datetime(2021, 5, 15, 22, 26, 51, 129970, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 5, 15, 22, 26, 51, 129970, tzinfo=<UTC>)}, {'id': 3, 'title': 'Python', 'desc': 'Este libro se trata de Python', 'created_at': datetime.datetime(2021, 5, 15, 22, 27, 11, 178100, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 5, 15, 22, 27, 11, 178100, tzinfo=<UTC>)}, {'id': 1, 'title': 'C #', 'desc': 'Este libro se trata de...', 'created_at': datetime.datetime(2021, 5, 
+15, 22, 26, 27, 415838, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 5, 15, 22, 38, 33, 631516, tzinfo=<UTC>)}]>
+>>> a2.books.add(Books.objects.get(id=1))     
+>>> a2.books.add(Books.objects.get(id=2))
+>>> a2.books.add(Books.objects.get(id=3))
+>>> first3books = Books.objects.filter(id__lt=4)
+>>> a3 = Authors.objects.get(id=3)              
+>>> print(a3.first_name)
+Fyodor
+>>> first4books = Books.objects.exclude(id=5)
+>>> print(first4books.title)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'QuerySet' object has no attribute 'title'
+>>> print(first4books)      
+<QuerySet [<Books: Books object (2)>, <Books: Books object (3)>, <Books: Books object (4)>, <Books: Books object (1)>]>
+>>> print(a2)
+Authors object (2)
+>>> a3.books.add(*first4books)
+>>> Authors.objects.get(id=4).books.add(*Books.objects.all())
+>>> b3 = Books.objects.get(id=3)
+>>> b3.save()
+>>> b3.Authors.all()     
+<QuerySet [<Authors: Authors object (2)>, <Authors: Authors object (3)>, <Authors: Authors object (4)>]>
+>>> b3.Authors.remove(Authors.objects.first())
+>>> b3.Authors.remove(Authors.objects.get(id=2)) 
+>>> b2 = Books.objects.get(id=2)
+>>> b2.save()
+>>> b2.Authors.add(Authors.objects.get(id=5))
+>>> >>> print(a3)
+Authors object (3)
+>>> a3.books.all()
+<QuerySet [<Books: Books object (4)>, <Books: Books object (1)>, <Books: Books object (3)>, <Books: Books object (2)>]>
+>>> Books.objects.get(id=5).Authors.all()
+<QuerySet [<Authors: Authors object (4)>]>
+>>>
+
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/IAMunoz/Form_test.git
+git push -u origin main
