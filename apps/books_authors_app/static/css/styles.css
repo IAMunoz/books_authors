@@ -1,0 +1,18 @@
+body{
+    outline: 1px red dotted;
+    margin: auto;
+    align-content: center;
+}
+.form1{
+    display: inline-block;
+    border: fuchsia 1px solid;
+    margin-left: 150px;
+    padding: 15px;
+}
+.booksTable{
+    display: inline-block;
+    vertical-align: top;
+    border: blue 1px solid;
+    margin-left: 150px;
+    padding: 15px;
+}
